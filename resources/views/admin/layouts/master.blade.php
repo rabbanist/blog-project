@@ -7,6 +7,8 @@
     <title>Admin Dashboard</title>
     <script src="https://cdn.tailwindcss.com"></script>
 
+    {!! ToastMagic::styles() !!}
+
     <script>
         function toggleSidebar() {
             const sidebar = document.getElementById("sidebar");
@@ -86,6 +88,29 @@
             @yield('content')
         </main>
     </div>
+
+    {!! ToastMagic::scripts() !!}
+    @if ($errors->any())
+        <script>
+            @foreach ($errors->all() as $error)
+                toastMagic.error("{{ $error }}");
+            @endforeach
+        </script>
+    @endif
+
+    @if (session('success'))
+        <script>
+            toastMagic.success("{{ session('success') }}");
+        </script>
+    @endif
+
+    @if (session('error'))
+        <script>
+            toastMagic.error("{{ session('error') }}");
+        </script>
+    @endif
+
+
 </body>
 
 </html>

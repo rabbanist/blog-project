@@ -3,12 +3,14 @@
 @section('content')
     <div class="flex justify-center">
         <div class="w-4/12 bg-white p-6 rounded-lg">
-            <form action="" method="post">
+            <form action="{{ route('register.store') }}" method="post">
+                @csrf
                 <div class="mb-4">
                     <label for="name" class="sr-only">Name</label>
                     <input type="text" name="name" id="name" placeholder="Your name"
                         class="bg-gray-100 border-2 w-full p-4 rounded-lg">
                 </div>
+
                 <div class="mb-4">
                     <label for="email" class="sr-only">Email</label>
                     <input type="text" name="email" id="email" placeholder="Your email address"
