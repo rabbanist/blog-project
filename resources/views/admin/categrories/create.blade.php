@@ -9,7 +9,7 @@
         <!-- Category Create Form -->
         <div class="bg-white p-6 rounded shadow mb-6">
             <h3 class="text-xl font-semibold mb-4">Create Category</h3>
-            <form class="space-y-4" action="" method="POST">
+            <form class="space-y-4" action="{{ route('categories.store') }}" method="POST">
                 @csrf
                 <div>
                     <label class="block text-gray-700">Category Name</label>

@@ -41,7 +41,8 @@
 
         <h2 class="text-2xl font-bold mb-6">Dashboard</h2>
         <nav class="space-y-2">
-            <a href="" class="block p-2 rounded hover:bg-gray-700 ">Categories</a>
+            <a href="{{ route('categories.index') }}"
+                class="block p-2 rounded hover:bg-gray-700 {{ Route::is('categories.*') ? 'bg-gray-700' : '' }} ">Categories</a>
             <a href="" class="block p-2 rounded hover:bg-gray-700 ">Posts</a>
         </nav>
     </div>

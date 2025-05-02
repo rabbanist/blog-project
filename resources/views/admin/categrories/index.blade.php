@@ -5,7 +5,8 @@
     <section id="categories">
         <div class="flex justify-between">
             <h2 class="text-2xl font-semibold mb-4">Categories</h2>
-            <a class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700" href="">Create Category</a>
+            <a class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 mb-2"
+                href="{{ route('categories.create') }}">Create Category</a>
         </div>
         <!-- Category Listing Table -->
         <div class="bg-white p-6 rounded shadow">
@@ -19,19 +20,30 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="text-gray-700">
-                        <td class="px-4 py-2 border">sdf</td>
-                        <td class="px-4 py-2 border">df</td>
-                        <td class="px-4 py-2 border space-x-2">
-                            <a href="" class="text-blue-500 hover:underline">Edit</a>
-                            <form class="inline-block" action="" method="POST"
-                                onsubmit="return confirm('Are you sure you want to delete this category?')">
-                                <button type="submit" class="text-red-500 hover:underline">Delete</button>
-                            </form>
 
-                        </td>
-                    </tr>
+                    @forelse ($categories as $category)
+                        <tr class="text-gray-700">
+                            <td class="px-4 py-2 border">{{ $loop->iteration }}</td>
+                            <td class="px-4 py-2 border">{{ $category->name }}</td>
+                            <td class="px-4 py-2 border space-x-2">
+                                <a href="{{ route('categories.edit', $category->id) }}"
+                                    class="text-blue-500 hover:underline">Edit</a>
 
+                                <form class="inline-block" action="{{ route('categories.destroy', $category->id) }}"
+                                    method="POST"
+                                    onsubmit="return confirm('Are you sure you want to delete this category?')">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="text-red-500 hover:underline">Delete</button>
+                                </form>
+
+                            </td>
+                        </tr>
+                    @empty
+                        <tr class="text-gray-700">
+                            <td colspan="3" class="px-4 py-2 border text-center">No categories found.</td>
+                        </tr>
+                    @endforelse
 
                 </tbody>
             </table>

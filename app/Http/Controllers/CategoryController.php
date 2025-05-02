@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
+use Devrabiul\ToastMagic\Facades\ToastMagic;
 
 class CategoryController extends Controller
 {
@@ -13,7 +14,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return view('admin.categrories.index');
+        $categories = Category::all();
+        return view('admin.categrories.index', compact('categories'));
     }
 
     /**
@@ -29,15 +31,11 @@ class CategoryController extends Controller
      */
     public function store(StoreCategoryRequest $request)
     {
-        //
-    }
+        $validated = $request->validated();
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Category $category)
-    {
-        //
+        Category::create($validated);
+
+        return redirect()->route('categories.index')->with(ToastMagic::success('Category created successfully'));
     }
 
     /**
@@ -45,7 +43,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+        return view('admin.categrories.edit', compact('category'));
     }
 
     /**
@@ -53,7 +51,11 @@ class CategoryController extends Controller
      */
     public function update(UpdateCategoryRequest $request, Category $category)
     {
-        //
+        $validated = $request->validated();
+
+        $category->update($validated);
+
+        return redirect()->route('categories.index')->with(ToastMagic::success('Category updated successfully'));
     }
 
     /**
@@ -61,6 +63,8 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        $category->delete();
+
+        return redirect()->route('categories.index')->with(ToastMagic::success('Category deleted successfully'));
     }
 }
