@@ -1,36 +1,19 @@
 @extends('frontend.layouts.app')
 
 @section('content')
-    <div class="flex justify-center">
-        <div class="w-4/12 bg-white p-6 rounded-lg">
-            <form action="" method="post">
-                <div class="mb-4">
-                    <label for="name" class="sr-only">Name</label>
-                    <input type="text" name="name" id="name" placeholder="Your name"
-                        class="bg-gray-100 border-2 w-full p-4 rounded-lg">
-                </div>
-                <div class="mb-4">
-                    <label for="email" class="sr-only">Email</label>
-                    <input type="text" name="email" id="email" placeholder="Your email address"
-                        class="bg-gray-100 border-2 w-full p-4 rounded-lg">
-                </div>
-                <div class="mb-4">
-                    <label for="password" class="sr-only">Password</label>
-                    <input type="password" name="password" id="password" placeholder="Password"
-                        class="bg-gray-100 border-2 w-full p-4 rounded-lg ">
-                </div>
+    <section class="min-h-[500px] flex items-center justify-center bg-gradient-to-r from-blue-400 to-indigo-700 text-white">
+        <div class="text-center px-6">
+            <h1 class="text-5xl font-extrabold mb-4 animate-pulse">🚀 Coming Soon</h1>
+            <p class="text-xl mb-6">We're working on something awesome. Stay tuned!</p>
 
-                <div class="mb-4">
-                    <label for="password_confirmation" class="sr-only">Password again</label>
-                    <input type="password" name="password_confirmation" id="password_confirmation"
-                        placeholder="Password again" class="bg-gray-100 border-2 w-full p-4 rounded-lg ">
-                </div>
-
-                <div>
-                    <button type="submit"
-                        class="bg-blue-500 text-white px-4 py-3 rounded font-medium w-full">Register</button>
-                </div>
+            <form class="flex flex-col sm:flex-row justify-center gap-4">
+                <input type="email" placeholder="Enter your email"
+                    class="px-4 py-3 rounded-lg text-gray-800 focus:outline-none focus:ring-2 focus:ring-indigo-300 w-72" />
+                <button type="submit"
+                    class="bg-white text-indigo-700 px-6 py-3 rounded-lg font-semibold hover:bg-indigo-100 transition">
+                    Notify Me
+                </button>
             </form>
         </div>
-    </div>
+    </section>
 @endsection

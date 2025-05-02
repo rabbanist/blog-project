@@ -12,14 +12,21 @@ Route::get('/', function () {
 
 // Dashboard Routes
 Route::get('/dashboard', function () {
-    return view('admin.dashboard')->name('dashboard');
-});
+    return view('admin.dashboard');
+})->middleware('auth')->name('dashboard');
 
 
 // Authentication Routes 
-Route::get('/register', [RegistrationController::class, 'registerForm'])->name('register');
-Route::post('/register', [RegistrationController::class, 'register'])->name('register.store');
-Route::get('/login', [LoginController::class, 'showLoginFrom'])->name('login');
+
+Route::middleware('guest')->group(function () {
+    Route::get('/register', [RegistrationController::class, 'registerForm'])->name('register');
+    Route::post('/register', [RegistrationController::class, 'register'])->name('register.store');
+    Route::get('/login', [LoginController::class, 'showLoginFrom'])->name('login');
+    Route::post('/login', [LoginController::class, 'login'])->name('login.store');
+});
+
+
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 
 //Post Resources Routes
