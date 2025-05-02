@@ -9,24 +9,30 @@
         <!-- Post Form -->
         <div class="bg-white p-6 rounded shadow mb-6">
             <h3 class="text-xl font-semibold mb-4"> Edit Post</h3>
-            <form action="" method="POST" class="space-y-4" enctype="multipart/form-data">
+            <form action="{{ route('posts.update', $post->id) }}" method="POST" class="space-y-4"
+                enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
                 <input type="hidden" name="user_id">
                 <div>
                     <label class="block text-gray-700">Title</label>
                     <input type="text" name="title" class="w-full p-2 border border-gray-300 rounded"
-                        placeholder="Post Title">
+                        value="{{ $post->title }}">
                 </div>
 
                 <div>
                     <label class="block text-gray-700">Content</label>
-                    <textarea name="content" class="w-full p-2 border border-gray-300 rounded" placeholder="Post Content" rows="5"></textarea>
+                    <textarea name="content" class="w-full p-2 border border-gray-300 rounded" placeholder="Post Content" rows="5">{{ $post->content }}</textarea>
                 </div>
 
                 <div>
                     <label class="block text-gray-700">Category</label>
                     <select name="category_id" class="w-full p-2 border border-gray-300 rounded">
                         <option value="">Select Category</option>
-                        <option value="">Demo</option>
+                        @foreach ($categories as $category)
+                            <option value="{{ $category->id }}" {{ $post->category_id == $category->id ? 'selected' : '' }}>
+                                {{ $category->name }}</option>
+                        @endforeach
                     </select>
                 </div>
 

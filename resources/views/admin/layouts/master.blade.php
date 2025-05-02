@@ -43,7 +43,8 @@
         <nav class="space-y-2">
             <a href="{{ route('categories.index') }}"
                 class="block p-2 rounded hover:bg-gray-700 {{ Route::is('categories.*') ? 'bg-gray-700' : '' }} ">Categories</a>
-            <a href="" class="block p-2 rounded hover:bg-gray-700 ">Posts</a>
+            <a href="{{ route('posts.index') }}"
+                class="block p-2 rounded hover:bg-gray-700 {{ Route::is('posts.*') ? 'bg-gray-700' : '' }} ">Posts</a>
         </nav>
     </div>
 

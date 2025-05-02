@@ -6,7 +6,8 @@
     <section id="posts">
         <div class="flex justify-between">
             <h2 class="text-2xl font-semibold mb-4">Posts</h2>
-            <a class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700" href="">Create
+            <a class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 mb-2"
+                href="{{ route('posts.create') }}">Create
                 Post</a>
         </div>
         <!-- Post Listing Table -->
@@ -25,27 +26,37 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="text-gray-700">
-                        <td class="px-4 py-2 border"></td>
-                        <td class="px-4 py-2 border">
-                            <img class="w-28 h-18" " alt="">
-                                                        </td>
-                                                        <td class="px-4 py-2 border">TOm</td>
-                                                        <td class="px-4 py-2 border">TOm</td>
-                                                        <td class="px-4 py-2 border">ddf</td>
-                                                        <td class="px-4 py-2 border">12/1232/</td>
-                                                        <td class="px-4 py-2 border space-x-2">
-                                                            <a href="" class="text-blue-500 hover:underline">Edit</a>
-                                                            <form class="inline-block" action="" method="POST"
-                                                                onsubmit="return confirm('Are you sure you want to delete this post?')">
-                                                                <button type="submit" class="text-red-500 hover:underline">Delete</button>
-                                                            </form>
-                                                        </td>
-                                                    </tr>
-                       
 
-                                    </tbody>
-                                </table>
-                            </div>
-                        </section>
+                    @forelse ($posts as $post)
+                        <tr class="text-gray-700">
+                            <td class="px-4 py-2 border">{{ $loop->iteration }}</td>
+                            <td class="px-4 py-2 border">
+                                <img class="w-10 h-10" src="{{ asset('/' . $post->featured_image) }}"
+                                    alt="Featured Image" />
+                            </td>
+                            <td class="px-4 py-2 border">{{ $post->title }}</td>
+                            <td class="px-4 py-2 border">{{ $post->user->name }}</td>
+                            <td class="px-4 py-2 border">{{ $post->created_at->diffForHumans() }}</td>
+                            <td class="px-4 py-2 border">{{ $post->created_at->format('d-m-y h:i') }}/</td>
+                            <td class="px-4 py-2 border space-x-2">
+                                <a href="{{ route('posts.edit', $post->id) }}"
+                                    class="text-blue-500 hover:underline">Edit</a>
+                                <form class="inline-block" action="{{ route('posts.destroy', $post->id) }}" method="POST"
+                                    onsubmit="return confirm('Are you sure you want to delete this post?')">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="text-red-500 hover:underline">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                    @empty
+                        <tr class="text-gray-700">
+                            <td colspan="7" class="px-4 py-2 border text-center">No posts found.</td>
+                        </tr>
+                    @endforelse
+
+                </tbody>
+            </table>
+        </div>
+    </section>
 @endsection
