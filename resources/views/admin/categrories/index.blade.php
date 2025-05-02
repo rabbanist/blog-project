@@ -47,8 +47,12 @@
 
                 </tbody>
             </table>
-            <br>
+            <div class="mt-4">
+                {{ $categories->links() }}
+            </div>
 
         </div>
+
+
     </section>
 @endsection

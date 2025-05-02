@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\Auth\LoginController;
@@ -10,14 +11,8 @@ Route::get('/', function () {
     return view('frontend.home');
 });
 
-// Dashboard Routes
-Route::get('/dashboard', function () {
-    return view('admin.dashboard');
-})->middleware('auth')->name('dashboard');
-
 
 // Authentication Routes 
-
 Route::middleware('guest')->group(function () {
     Route::get('/register', [RegistrationController::class, 'registerForm'])->name('register');
     Route::post('/register', [RegistrationController::class, 'register'])->name('register.store');
@@ -26,12 +21,12 @@ Route::middleware('guest')->group(function () {
 });
 
 
-Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 
-//Post Resources Routes
-Route::resource('posts', PostController::class);
 
-
-// Category Resources Routes
-Route::resource('categories', CategoryController::class);
+Route::prefix('admin')->middleware('auth')->group(function () {
+    Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
+    Route::resource('posts', PostController::class);
+    Route::resource('categories', CategoryController::class);
+    Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+});

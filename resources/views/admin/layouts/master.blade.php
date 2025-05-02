@@ -39,7 +39,8 @@
             </svg>
         </button>
 
-        <h2 class="text-2xl font-bold mb-6">Dashboard</h2>
+        <a href="{{ route('dashboard') }}"
+            class="text-2xl font-bold text-white mb-6 flex items-center space-x-2"><span>Dashboard</span> </a>
         <nav class="space-y-2">
             <a href="{{ route('categories.index') }}"
                 class="block p-2 rounded hover:bg-gray-700 {{ Route::is('categories.*') ? 'bg-gray-700' : '' }} ">Categories</a>
